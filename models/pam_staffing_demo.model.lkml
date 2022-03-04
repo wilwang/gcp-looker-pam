@@ -1,3 +1,6 @@
+include: "/views/**/*.view" # include all the views
+#include: "/dashboards/*.dashboard.lookml" # include all the dashboards
+
 # Define the database connection to be used for this model.
 connection: "ww_pam_staffing"
 
@@ -10,3 +13,8 @@ datagroup: pam_staffing_demo_default_datagroup {
 }
 
 persist_with: pam_staffing_demo_default_datagroup
+
+explore: facilities {
+  label: "pam_staffing_demo_facilites"
+  persist_with: pam_staffing_demo_default_datagroup
+}
