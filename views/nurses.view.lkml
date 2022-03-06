@@ -1,20 +1,3 @@
-# Un-hide and use this explore, or copy the joins into another explore, to get all the fully nested relationships from this view
-explore: nurses {
-  hidden: yes
-
-  join: nurses__specialization {
-    view_label: "Nurses: Specialization"
-    sql: LEFT JOIN UNNEST(${nurses.specialization}) as nurses__specialization ;;
-    relationship: one_to_many
-  }
-
-  join: nurses__certified_states {
-    view_label: "Nurses: Certified States"
-    sql: LEFT JOIN UNNEST(${nurses.certified_states}) as nurses__certified_states ;;
-    relationship: one_to_many
-  }
-}
-
 # The name of this view in Looker is "Nurses"
 view: nurses {
   # The sql_table_name parameter indicates the underlying database table
@@ -37,6 +20,7 @@ view: nurses {
   # This dimension will be called "Emp ID" in Explore.
 
   dimension: emp_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.emp_id ;;
   }
@@ -58,12 +42,13 @@ view: nurses {
 
   dimension: willing_to_travel {
     type: yesno
+    label: "Can Travel"
     sql: ${TABLE}.willing_to_travel ;;
   }
 
   measure: count {
     type: count
-    drill_fields: [name]
+    drill_fields: [emp_id, name, willing_to_travel]
   }
 }
 

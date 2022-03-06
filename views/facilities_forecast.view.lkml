@@ -26,26 +26,13 @@ view: facilities_forecast {
     sql: ${TABLE}.episodes_current ;;
   }
 
-  # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
-  # measures for this dimension, but you can also add measures of many different aggregates.
-  # Click on the type parameter to see all the options in the Quick Help panel on the right.
-
-  measure: total_episodes_current {
-    type: sum
-    sql: ${episodes_current} ;;
-  }
-
-  measure: average_episodes_current {
-    type: average
-    sql: ${episodes_current} ;;
-  }
-
   dimension: episodes_forecast {
     type: number
     sql: ${TABLE}.episodes_forecast ;;
   }
 
   dimension: facility {
+    primary_key: yes
     type: string
     sql: ${TABLE}.facility ;;
   }
@@ -58,6 +45,12 @@ view: facilities_forecast {
   dimension: longitude {
     type: number
     sql: ${TABLE}.longitude ;;
+  }
+
+  dimension: location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
   }
 
   dimension: nurses_current {
