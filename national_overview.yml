@@ -1,0 +1,249 @@
+- dashboard: national_overview
+  title: National Overview
+  layout: newspaper
+  preferred_viewer: dashboards-next
+  description: ''
+  elements:
+  - title: National Overview
+    name: National Overview
+    model: pam_staffing_demo
+    explore: facilities_overview
+    type: looker_map
+    fields: [facilities_overview.facility, facilities_overview.name, facilities_overview.location,
+      facilities_overview.patient_nurse_ratio, facilities_overview.num_episodes, facilities_overview.num_nurses,
+      facilities_overview.alert_level, facilities_overview.prevalent_condition]
+    sorts: [facilities_overview.alert_level]
+    limit: 500
+    query_timezone: America/New_York
+    map_plot_mode: points
+    heatmap_gridlines: false
+    heatmap_gridlines_empty: false
+    heatmap_opacity: 0.5
+    show_region_field: true
+    draw_map_labels_above_data: true
+    map_tile_provider: light
+    map_position: fit_data
+    map_scale_indicator: 'off'
+    map_pannable: true
+    map_zoomable: true
+    map_marker_type: icon
+    map_marker_icon_name: default
+    map_marker_radius_mode: fixed
+    map_marker_units: pixels
+    map_marker_proportional_scale_type: linear
+    map_marker_color_mode: value
+    show_view_names: false
+    show_legend: true
+    quantize_map_value_colors: true
+    reverse_map_value_colors: false
+    map_marker_radius_fixed: 8
+    map_marker_radius_min: 5
+    map_marker_radius_max: 20
+    series_types: {}
+    defaults_version: 1
+    hidden_fields: [facilities_overview.num_episodes, facilities_overview.num_nurses,
+      facilities_overview.alert_level, facilities_overview.name]
+    listen: {}
+    row: 0
+    col: 0
+    width: 14
+    height: 13
+  - title: ''
+    name: ''
+    model: pam_staffing_demo
+    explore: facilities_overview
+    type: looker_grid
+    fields: [facilities_overview.facility, facilities_overview.name, facilities_overview.patient_nurse_ratio,
+      facilities_overview.num_episodes, facilities_overview.num_nurses, facilities_overview.prevalent_condition]
+    sorts: [facilities_overview.patient_nurse_ratio desc]
+    limit: 500
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: google
+      palette_id: google-categorical-0
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    series_column_widths:
+      facilities_overview.facility: 92
+      facilities_overview.name: 337
+      facilities_overview.patient_nurse_ratio: 156
+      facilities_overview.num_episodes: 114
+      facilities_overview.num_nurses: 103
+    series_cell_visualizations:
+      facilities_overview.patient_nurse_ratio:
+        is_active: false
+    conditional_formatting: [{type: greater than, value: 3.5, background_color: "#EA4335",
+        font_color: !!null '', color_application: {collection_id: google, custom: {
+            id: a7a6052d-bf7c-60c5-a8bb-856018989e1e, label: Custom, type: continuous,
+            stops: [{color: green, offset: 0}, {color: yellow, offset: 50}, {color: red,
+                offset: 100}]}, options: {steps: 3, stepped: true, mirror: false,
+            reverse: true}}, bold: false, italic: false, strikethrough: false, fields: [
+          facilities_overview.patient_nurse_ratio]}, {type: between, value: [3.1,
+          3.5], background_color: "#FBBC04", font_color: !!null '', color_application: {
+          collection_id: google, palette_id: google-diverging-0}, bold: false, italic: false,
+        strikethrough: false, fields: [facilities_overview.patient_nurse_ratio]},
+      {type: less than, value: 3.1, background_color: "#34A853", font_color: !!null '',
+        color_application: {collection_id: google, palette_id: google-diverging-0},
+        bold: false, italic: false, strikethrough: false, fields: [facilities_overview.patient_nurse_ratio]}]
+    series_types: {}
+    defaults_version: 1
+    hidden_fields:
+    title_hidden: true
+    listen: {}
+    row: 13
+    col: 0
+    width: 14
+    height: 4
+  - title: Highest Patient/Nurse Ratio
+    name: Highest Patient/Nurse Ratio
+    model: pam_staffing_demo
+    explore: facilities_overview
+    type: looker_single_record
+    fields: [facilities_overview.facility, facilities_overview.name, facilities_overview.patient_nurse_ratio,
+      facilities_overview.num_episodes, facilities_overview.num_nurses, facilities_overview.prevalent_condition]
+    sorts: [facilities_overview.patient_nurse_ratio desc]
+    limit: 500
+    show_view_names: false
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: google
+      palette_id: google-categorical-0
+    custom_color: ''
+    comparison_label: Patient/Nurse Ratio
+    conditional_formatting: [{type: greater than, value: 3.5, background_color: "#EA4335",
+        font_color: !!null '', color_application: {collection_id: google, palette_id: google-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}, {type: less
+          than, value: 3, background_color: "#34A853", font_color: !!null '', color_application: {
+          collection_id: google, palette_id: google-diverging-0}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}, {type: between, value: [3.1, 3.5],
+        background_color: "#FBBC04", font_color: !!null '', color_application: {collection_id: google,
+          palette_id: google-diverging-0}, bold: false, italic: false, strikethrough: false,
+        fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: editable
+    hidden_fields: []
+    hidden_points_if_no: []
+    series_labels: {}
+    listen: {}
+    row: 0
+    col: 14
+    width: 5
+    height: 6
+  - title: Lowest Patient/Nurse Ratio
+    name: Lowest Patient/Nurse Ratio
+    model: pam_staffing_demo
+    explore: facilities_overview
+    type: looker_single_record
+    fields: [facilities_overview.facility, facilities_overview.name, facilities_overview.patient_nurse_ratio,
+      facilities_overview.num_episodes, facilities_overview.num_nurses, facilities_overview.prevalent_condition]
+    sorts: [facilities_overview.patient_nurse_ratio]
+    limit: 500
+    show_view_names: false
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: google
+      palette_id: google-categorical-0
+    conditional_formatting: [{type: greater than, value: 3.5, background_color: "#EA4335",
+        font_color: !!null '', color_application: {collection_id: google, palette_id: google-diverging-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}, {type: between,
+        value: [3.1, 3.5], background_color: "#FBBC04", font_color: !!null '', color_application: {
+          collection_id: google, palette_id: google-diverging-0}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}, {type: less than, value: 3, background_color: "#34A853",
+        font_color: !!null '', color_application: {collection_id: google, palette_id: google-diverging-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    listen: {}
+    row: 6
+    col: 14
+    width: 5
+    height: 6

@@ -1,0 +1,249 @@
+- dashboard: forecast
+  title: Forecast
+  layout: newspaper
+  preferred_viewer: dashboards-next
+  description: ''
+  elements:
+  - title: Forecast
+    name: Forecast
+    model: pam_staffing_demo
+    explore: episodes_forecast
+    type: looker_line
+    fields: [episodes_forecast.date_month, episodes_count, nurses_count, episodes_forecast.type]
+    sorts: [episodes_forecast.date_month]
+    limit: 500
+    dynamic_fields: [{category: measure, expression: !!null '', label: Episodes Count,
+        value_format: !!null '', value_format_name: !!null '', based_on: episodes_forecast.num_episodes,
+        _kind_hint: measure, measure: episodes_count, type: sum, _type_hint: sum},
+      {category: measure, expression: !!null '', label: Nurses Count, value_format: !!null '',
+        value_format_name: !!null '', based_on: episodes_forecast.num_nurses, _kind_hint: measure,
+        measure: nurses_count, type: sum, _type_hint: sum}, {category: table_calculation,
+        expression: 'if (${episodes_forecast.type} = 0, ${episodes_count}, null)',
+        label: Episodes Count, value_format: !!null '', value_format_name: !!null '',
+        _kind_hint: measure, table_calculation: episodes_count_1, _type_hint: number},
+      {category: table_calculation, expression: 'if (${episodes_forecast.type}=1,
+          ${episodes_count}, null)', label: Episodes Forecast Count, value_format: !!null '',
+        value_format_name: !!null '', _kind_hint: measure, table_calculation: episodes_forecast_count,
+        _type_hint: number}, {category: table_calculation, expression: 'if(${episodes_forecast.type}=0,${nurses_count},
+          null)', label: Nurses Count, value_format: !!null '', value_format_name: !!null '',
+        _kind_hint: measure, table_calculation: nurses_count_1, _type_hint: number},
+      {category: table_calculation, expression: 'if(${episodes_forecast.type}=1,${nurses_count},null)',
+        label: Nurses Forecast Count, value_format: !!null '', value_format_name: !!null '',
+        _kind_hint: measure, table_calculation: nurses_forecast_count, _type_hint: number}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: false
+    interpolation: linear
+    color_application:
+      collection_id: google
+      palette_id: google-categorical-0
+      options:
+        steps: 5
+    y_axes: [{label: '', orientation: left, series: [{axisId: episodes_count, id: episodes_count,
+            name: Episodes Count}, {axisId: nurses_count, id: nurses_count, name: Nurses
+              Count}], showLabels: false, showValues: true, unpinAxis: false, tickDensity: default,
+        tickDensityCustom: 5, type: linear}]
+    size_by_field: ''
+    hide_legend: false
+    series_types:
+      episodes_count: column
+      episodes_forecast_count: column
+      nurses_forecast_count: scatter
+      episodes_count_1: column
+    series_colors:
+      nurses_count: "#185ABC"
+      episodes_count: "#E8EAED"
+      episodes_forecast_count: "#E8EAED"
+      episodes_count_1: "#9AA0A6"
+      nurses_count_1: "#185ABC"
+      nurses_forecast_count: "#4285F4"
+    series_point_styles: {}
+    x_axis_datetime_label: "%b %y"
+    discontinuous_nulls: false
+    defaults_version: 1
+    hidden_fields: [episodes_count, nurses_count, episodes_forecast.type]
+    listen:
+      Facility: episodes_forecast.facility
+    row: 5
+    col: 0
+    width: 20
+    height: 9
+  - title: Untitled
+    name: Untitled
+    model: pam_staffing_demo
+    explore: episodes_forecast
+    type: single_value
+    fields: [episodes_forecast.date_month, episodes_forecast.num_episodes]
+    sorts: [episodes_forecast.date_month desc]
+    limit: 500
+    filter_expression: "${episodes_forecast.date_date} < add_months(1, now())"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: google
+      palette_id: google-categorical-0
+    single_value_title: Forecasted Episodes (#)
+    comparison_label: Episodes Current (#)
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#29bff3",
+        font_color: !!null '', color_application: {collection_id: barclays, palette_id: barclays-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [episodes_forecast.date_month]
+    listen:
+      Facility: episodes_forecast.facility
+    row: 0
+    col: 0
+    width: 4
+    height: 5
+  - title: Forecasted Nurses (#)
+    name: Forecasted Nurses (#)
+    model: pam_staffing_demo
+    explore: episodes_forecast
+    type: single_value
+    fields: [episodes_forecast.date_month, episodes_forecast.facility, episodes_forecast.num_nurses]
+    sorts: [episodes_forecast.date_month desc]
+    limit: 500
+    filter_expression: "${episodes_forecast.date_date}< add_months(1, now())"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: google
+      palette_id: google-categorical-0
+    custom_color: ''
+    comparison_label: Nurses Current (#)
+    conditional_formatting: []
+    hidden_fields: [episodes_forecast.date_month, episodes_forecast.facility]
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    defaults_version: 1
+    series_types: {}
+    listen:
+      Facility: episodes_forecast.facility
+    row: 0
+    col: 4
+    width: 4
+    height: 5
+  - title: Recommendations
+    name: Recommendations
+    model: pam_staffing_demo
+    explore: facilities_forecast
+    type: marketplace_viz_multiple_value::multiple_value-marketplace
+    fields: [facilities_forecast.facility, facilities_forecast.nurses_forecast, facilities_forecast.condition_forecast]
+    limit: 500
+    hidden_fields: [facilities_forecast.facility]
+    hidden_points_if_no: []
+    series_labels: {}
+    show_view_names: false
+    font_size_main: '18'
+    orientation: horizontal
+    style_facilities_forecast.nurses_forecast: "#0872a8"
+    title_overrride_facilities_forecast.nurses_forecast: Hires
+    style_facilities_forecast.condition_forecast: "#0872a8"
+    title_overrride_facilities_forecast.condition_forecast: Specialization
+    show_comparison_facilities_forecast.condition_forecast: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 0
+    series_types: {}
+    listen:
+      Facility: facilities_forecast.facility
+    row: 0
+    col: 8
+    width: 12
+    height: 5
+  filters:
+  - name: Facility
+    title: Facility
+    type: field_filter
+    default_value: RH-DO-DE
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: dropdown_menu
+      display: inline
+      options: []
+    model: pam_staffing_demo
+    explore: episodes_history
+    listens_to_filters: []
+    field: episodes_history.facility
